@@ -37,7 +37,7 @@ public class SuperpacketFactory extends PacketFactory {
         List<PacketComponent> packetComponents = new ArrayList<>();
 
         for(String s: subStrings){
-            packetComponents.add(new Packet(destinationAddress, s));
+            if (!s.equals("")) packetComponents.add(new Packet(destinationAddress, s));
         }
         return packetComponents;
     }

@@ -1,6 +1,9 @@
 package be.abis.lan.model;
 
 import be.abis.lan.exception.DestinationNotFoundException;
+import be.abis.lan.observer.Destination;
+import be.abis.lan.observer.DestinationListener;
+import be.abis.lan.observer.PacketArrivedEvent;
 
 import java.util.ArrayList;
 import java.util.List;

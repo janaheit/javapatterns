@@ -17,9 +17,23 @@ public class Superpacket implements PacketComponent {
     public String getContents() {
         String content = "";
         for (PacketComponent pc: subPackets){
-            content = content + " " + pc.getContents();
+
+            if (pc instanceof Superpacket){
+                content = content + pc.getContents();
+                if (!((Superpacket) pc).hasSuperPackets()) content = content.trim() + ". ";
+            } else {
+                content = content + pc.getContents() + " ";
+            }
         }
+
         return content;
+    }
+
+    private Boolean hasSuperPackets(){
+        for (PacketComponent pc: subPackets){
+            if (pc instanceof Superpacket) return true;
+        }
+        return false;
     }
 
     public void addPacketComponent(PacketComponent pc){

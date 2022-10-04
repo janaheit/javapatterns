@@ -1,6 +1,8 @@
 package be.abis.lan.model;
 
 import be.abis.lan.exception.DestinationNotFoundException;
+import be.abis.lan.observer.DestinationListener;
+import be.abis.lan.observer.PacketArrivedEvent;
 
 public class WorkStation extends Node implements DestinationListener {
     public WorkStation(String address) {

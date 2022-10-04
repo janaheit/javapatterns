@@ -1,4 +1,4 @@
-package be.abis.lan.model;
+package be.abis.lan.observer;
 
 public interface Destination {
 

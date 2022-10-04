@@ -1,4 +1,6 @@
-package be.abis.lan.model;
+package be.abis.lan.observer;
+
+import be.abis.lan.model.PacketHandler;
 
 public class PacketArrivedEvent  {
     private PacketHandler source;
