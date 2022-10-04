@@ -1,5 +1,8 @@
 package be.abis.lan.test;
 
+import be.abis.lan.decorator.Representation;
+import be.abis.lan.decorator.ShadedRepresentationDecorator;
+import be.abis.lan.decorator.TextualRepresentationDecorator;
 import be.abis.lan.enums.LanType;
 import be.abis.lan.enums.PacketType;
 import be.abis.lan.exception.DestinationNotFoundException;
@@ -18,6 +21,17 @@ public class Network {
         LanFactory lanFactory = LanFactory.createFactory(LanType.EXTENDED);
         LanFacade lanFacade = new LanFacade(lanFactory);
         List<Node> nodes= lanFacade.constructLan();
+
+        // test decorators
+        Representation node1 = nodes.get(0);
+
+        Representation textualNode = new TextualRepresentationDecorator(node1);
+        textualNode.represent();
+
+        Representation textualShaded = new TextualRepresentationDecorator(new ShadedRepresentationDecorator(node1));
+        textualShaded.represent();
+
+
 
         // create packet
         PacketFactory packetFactory= PacketFactory.createFactory(PacketType.SIMPLE);

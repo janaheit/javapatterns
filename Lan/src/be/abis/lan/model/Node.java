@@ -1,8 +1,9 @@
 package be.abis.lan.model;
 
+import be.abis.lan.decorator.Representation;
 import be.abis.lan.exception.DestinationNotFoundException;
 
-public class Node extends LanComponent {
+public class Node extends LanComponent implements Representation {
 
     public Node(String address) {
         super(address);
@@ -19,4 +20,8 @@ public class Node extends LanComponent {
     }
 
 
+    @Override
+    public void represent() {
+        System.out.println("(circle)");
+    }
 }
