@@ -20,6 +20,5 @@ public class TextualRepresentationDecorator extends RepresentationDecorator {
         if (representation instanceof Node){
             System.out.println("(" + ((Node)representation).getClass().getSimpleName() + ")");
         }
-
     }
 }

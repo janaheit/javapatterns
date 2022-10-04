@@ -1,5 +1,6 @@
 package be.abis.lan.test;
 
+import be.abis.lan.decorator.GraphicalRepresentationDecorator;
 import be.abis.lan.decorator.Representation;
 import be.abis.lan.decorator.ShadedRepresentationDecorator;
 import be.abis.lan.decorator.TextualRepresentationDecorator;
@@ -24,13 +25,24 @@ public class Network {
 
         // test decorators
         Representation node1 = nodes.get(0);
+        Representation node2 = nodes.get(1);
 
         Representation textualNode = new TextualRepresentationDecorator(node1);
         textualNode.represent();
+        System.out.println("----------------------------------------------");
 
         Representation textualShaded = new TextualRepresentationDecorator(new ShadedRepresentationDecorator(node1));
         textualShaded.represent();
+        System.out.println("----------------------------------------------");
 
+        Representation shadedGraphicalTextual = new ShadedRepresentationDecorator(new GraphicalRepresentationDecorator(new TextualRepresentationDecorator(node1)));
+        shadedGraphicalTextual.represent();
+
+        System.out.println("----------------------------------------------");
+
+        Representation textualGraphicalShaded = new TextualRepresentationDecorator(new GraphicalRepresentationDecorator(new ShadedRepresentationDecorator(node2)));
+        textualGraphicalShaded.represent();
+        System.out.println("----------------------------------------------");
 
 
         // create packet
