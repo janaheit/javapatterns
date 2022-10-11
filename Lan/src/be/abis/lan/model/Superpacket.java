@@ -8,11 +8,8 @@ public class Superpacket implements PacketComponent {
     private String destinationAddress;
     private String originAddress;
 
-    public Superpacket(String destinationAddress, List<PacketComponent> subPackets) {
+    public Superpacket(String destinationAddress) {
         this.destinationAddress = destinationAddress;
-        this.subPackets = subPackets;
-        // the subpackets should be added via add component and not in the constructor -> this is more of the decorator already
-
     }
 
     @Override

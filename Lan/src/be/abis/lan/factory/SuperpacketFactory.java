@@ -17,28 +17,37 @@ public class SuperpacketFactory extends PacketFactory {
 
     @Override
     public PacketComponent createPacket(String destinationAddress, String contents) {
+        PacketComponent pc = new Superpacket(destinationAddress);
 
-        List<PacketComponent> subPackets = new ArrayList<>();
+        String[] subSentences = splitSentences(contents);
+        System.out.println("This will contain "+ subSentences.length + " superpacket(s).");
+        for(String sentence: subSentences){
+            PacketComponent superpacket = new Superpacket(destinationAddress);
+            String[] words = splitSentence(sentence);
+            System.out.println("This will contain " + words.length + " packet(s).");
+            for (String word: words){
+                PacketComponent packet = new Packet(destinationAddress, word.trim());
+                ((Superpacket)superpacket).addPacketComponent(packet);
+            }
+            ((Superpacket)pc).addPacketComponent(superpacket);
+        }
 
+        return pc;
+    }
 
+    private String[] splitSentences(String contents){
         String regexSplitSentence = "(?<=[.,?!]\\s)";
         Pattern p = Pattern.compile(regexSplitSentence);
         String[] subSentences = p.split(contents);
-        if (subSentences.length > 1) {
-            for (String sentence : subSentences){
-                System.out.println("Superpacket/ " + sentence);
-                List<PacketComponent> listOfPackets = splitSentenceIntoListOfPackets(destinationAddress, sentence);
-                subPackets.add(new Superpacket(destinationAddress, listOfPackets));
-            }
-        } else {
-            subPackets = splitSentenceIntoListOfPackets(destinationAddress, contents);
-        }
+        return subSentences;
+    }
 
-        return new Superpacket(destinationAddress, subPackets);
+    private String[] splitSentence(String contents){
+        return contents.split(" ");
     }
 
     private List<PacketComponent> splitSentenceIntoListOfPackets(String destinationAddress, String sentence){
-        String[] subStrings = sentence.split(" ");
+        String[] subStrings = splitSentence(sentence);
         List<PacketComponent> packetComponents = new ArrayList<>();
 
         for(String s: subStrings){
