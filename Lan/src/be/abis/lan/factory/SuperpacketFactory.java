@@ -6,6 +6,7 @@ import be.abis.lan.model.Superpacket;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class SuperpacketFactory extends PacketFactory {
 
@@ -19,9 +20,13 @@ public class SuperpacketFactory extends PacketFactory {
 
         List<PacketComponent> subPackets = new ArrayList<>();
 
-        String[] subSentences = contents.split("\\.");
+
+        String regexSplitSentence = "(?<=[.,?!]\\s)";
+        Pattern p = Pattern.compile(regexSplitSentence);
+        String[] subSentences = p.split(contents);
         if (subSentences.length > 1) {
             for (String sentence : subSentences){
+                System.out.println("Superpacket/ " + sentence);
                 List<PacketComponent> listOfPackets = splitSentenceIntoListOfPackets(destinationAddress, sentence);
                 subPackets.add(new Superpacket(destinationAddress, listOfPackets));
             }
@@ -37,6 +42,7 @@ public class SuperpacketFactory extends PacketFactory {
         List<PacketComponent> packetComponents = new ArrayList<>();
 
         for(String s: subStrings){
+            System.out.println("Packet/ " + s);
             if (!s.equals("")) packetComponents.add(new Packet(destinationAddress, s));
         }
         return packetComponents;

@@ -22,7 +22,6 @@ public class Superpacket implements PacketComponent {
 
             if (pc instanceof Superpacket){
                 content = content + pc.getContents();
-                if (!((Superpacket) pc).hasSuperPackets()) content = content.trim() + ". ";
             } else {
                 content = content + pc.getContents() + " ";
             }
