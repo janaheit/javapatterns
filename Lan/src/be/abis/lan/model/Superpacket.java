@@ -17,17 +17,18 @@ public class Superpacket implements PacketComponent {
 
     @Override
     public String getContents() {
-        String content = "";
+        StringBuilder content = new StringBuilder();
         for (PacketComponent pc: subPackets){
 
             if (pc instanceof Superpacket){
-                content = content + pc.getContents();
+                content.append(pc.getContents());
             } else {
-                content = content + pc.getContents() + " ";
+                content.append(pc.getContents());
+                content.append(" ");
             }
         }
 
-        return content;
+        return content.toString();
     }
 
     private Boolean hasSuperPackets(){
